@@ -66,3 +66,97 @@ Note that you'll need to replace `'your_username'`, `'your_password'`, and `'ena
 Keep in mind that Netmiko supports various device types, so you may need to adjust the `device_type` parameter depending on the type of network device you're connecting to (e.g., `cisco_ios`, `cisco_xr`, `juniper_junos`, etc.).
 
 - `DO_netmiko.py` is present in the repo
+
+
+## Scapy Library 
+
+`Scapy` is a powerful packet manipulation tool in Python that allows you to create, send, and analyze network packets. It is widely used for network testing, analysis, and penetration testing. Below are some examples demonstrating the basic usage of `Scapy`:
+
+### Example 1: Sending ICMP (Ping) Packet
+
+```python
+from scapy.all import *
+
+# Create an ICMP packet
+packet = IP(dst="www.google.com") / ICMP()
+
+# Send the packet and receive a response
+response = sr1(packet, timeout=2, verbose=False)
+
+# Check if a response was received
+if response:
+    print(f"Received response from {response.src}")
+else:
+    print("No response received")
+```
+
+### Example 2: Sending TCP Packet
+
+```python
+from scapy.all import *
+
+# Create a TCP packet
+packet = IP(dst="www.example.com") / TCP(dport=80, flags="S")
+
+# Send the packet and receive a response
+response = sr1(packet, timeout=2, verbose=False)
+
+# Check if a response was received
+if response:
+    print(f"Received response from {response.src}")
+else:
+    print("No response received")
+```
+
+### Example 3: Sniffing Packets
+
+```python
+from scapy.all import *
+
+# Define a packet sniffing function
+def packet_sniffer(packet):
+    print(packet.summary())
+
+# Start sniffing packets on the network
+sniff(filter="icmp", prn=packet_sniffer, count=5)
+```
+
+### Example 4: Crafting a Custom Packet
+
+```python
+from scapy.all import *
+
+# Create a custom packet
+packet = Ether(src="00:11:22:33:44:55", dst="66:77:88:99:00:11") / \
+         IP(src="192.168.1.100", dst="192.168.1.1") / \
+         TCP(sport=1234, dport=80)
+
+# Send the packet
+sendp(packet, iface="eth0")
+```
+
+### Example 5: Creating and Sending ARP Request
+
+```python
+from scapy.all import *
+
+# Create an ARP request packet
+packet = Ether(dst="ff:ff:ff:ff:ff:ff") / ARP(pdst="192.168.1.1")
+
+# Send the ARP request
+response = srp1(packet, timeout=2, verbose=False)
+
+# Check if a response was received
+if response:
+    print(f"Received response from {response.psrc}")
+else:
+    print("No response received")
+```
+
+Before running these examples, ensure that you have `Scapy` installed. You can install it using `pip`:
+
+```bash
+pip install scapy
+```
+
+Please note that some of these examples involve sending packets, which might not be appropriate or allowed in all environments. Always use caution and ensure you have appropriate permissions and legal rights to perform any network-related activities.
