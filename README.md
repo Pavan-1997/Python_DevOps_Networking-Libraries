@@ -15,3 +15,8 @@ The socket library provides low-level networking capabilities. It allows you to 
     You should see output indicating that the client sends a message, the server receives it, and then echoes it back to the client.
 
 - Both the `server.py` and `client.py` are present in the repo 
+
+
+##  Requests Library
+
+The `requests` library in Python is a widely-used library for making HTTP requests. It simplifies the process of sending HTTP requests and handling responses. Below is an example that demonstrates how to use the `requests` library to make a simple HTTP GET request:
