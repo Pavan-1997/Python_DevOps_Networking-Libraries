@@ -40,7 +40,8 @@ The `requests` library is incredibly versatile and can be used for a wide range 
 
 - `DO_requests.py` is present in the repo
 
-### Netmiko Library
+
+## Netmiko Library
 
 Netmiko is a multi-vendor library that simplifies SSH connections to network devices and provides an easy-to-use interface for sending commands and receiving responses. It supports a wide range of network devices, including routers and switches from various vendors.
 
