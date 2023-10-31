@@ -44,37 +44,6 @@ The `requests` library is incredibly versatile and can be used for a wide range 
 
 Netmiko is a multi-vendor library that simplifies SSH connections to network devices and provides an easy-to-use interface for sending commands and receiving responses. It supports a wide range of network devices, including routers and switches from various vendors.
 
-Here's an example of how to use the Netmiko library to connect to a network device and execute a command:
-
-```python
-from netmiko import ConnectHandler
-
-# Define the device information
-device = {
-    'device_type': 'cisco_ios',
-    'ip': '192.168.0.1',
-    'username': 'your_username',
-    'password': 'your_password',
-    'secret': 'enable_password',  # Enable password if required
-}
-
-# Connect to the device
-connection = ConnectHandler(**device)
-
-# Enter enable mode if required
-connection.enable()
-
-# Send a command and get the output
-command = 'show interfaces'
-output = connection.send_command(command)
-
-# Print the output
-print(output)
-
-# Disconnect from the device
-connection.disconnect()
-```
-
 **Implementation:**
 
 1. Import the `ConnectHandler` class from `netmiko`.
