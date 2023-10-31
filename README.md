@@ -16,6 +16,8 @@ The socket library provides low-level networking capabilities. It allows you to 
 
 - Both the `server.py` and `client.py` are present in the repo 
 
+![image](https://github.com/Pavan-1997/Python_DevOps_Networking-Libraries/assets/32020205/1c643d00-db8a-4695-aded-5396a686e1a4)
+
 
 ##  Requests Library
 
