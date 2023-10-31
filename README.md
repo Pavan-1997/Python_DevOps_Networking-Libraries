@@ -160,3 +160,66 @@ pip install scapy
 ```
 
 Please note that some of these examples involve sending packets, which might not be appropriate or allowed in all environments. Always use caution and ensure you have appropriate permissions and legal rights to perform any network-related activities.
+
+
+## Twisted Library 
+
+The Twisted library is an event-driven networking framework for Python. It provides support for various protocols, including TCP, UDP, SSH, and more. Below are examples of using Twisted for a simple TCP server and client:
+
+### Example 1: Twisted TCP Server
+
+```python
+from twisted.internet import protocol, reactor
+
+class EchoProtocol(protocol.Protocol):
+    def dataReceived(self, data):
+        self.transport.write(data)
+
+class EchoFactory(protocol.Factory):
+    def buildProtocol(self, addr):
+        return EchoProtocol()
+
+reactor.listenTCP(12345, EchoFactory())
+reactor.run()
+```
+
+In this example, we create a simple Echo server. It listens on port 12345 and echoes back any data it receives.
+
+### Example 2: Twisted TCP Client
+
+```python
+from twisted.internet import reactor, protocol
+
+class EchoClient(protocol.Protocol):
+    def connectionMade(self):
+        self.transport.write(b'Hello, server!')
+
+    def dataReceived(self, data):
+        print(f'Received from server: {data.decode()}')
+        self.transport.loseConnection()
+
+class EchoClientFactory(protocol.ClientFactory):
+    def buildProtocol(self, addr):
+        return EchoClient()
+
+    def clientConnectionFailed(self, connector, reason):
+        print(f'Connection failed: {reason.getErrorMessage()}')
+        reactor.stop()
+
+    def clientConnectionLost(self, connector, reason):
+        print(f'Connection lost: {reason.getErrorMessage()}')
+        reactor.stop()
+
+connector = reactor.connectTCP('127.0.0.1', 12345, EchoClientFactory())
+reactor.run()
+```
+
+In this example, we create a client that connects to a TCP server running on `127.0.0.1:12345`. It sends a message to the server and waits for a response.
+
+Before running these examples, ensure that you have Twisted installed. You can install it using `pip`:
+
+```bash
+pip install twisted
+```
+
+These examples showcase a simple echo server and client. Twisted is capable of handling much more complex networking tasks, including protocols like HTTP, SMTP, IMAP, and more. It's a versatile library for building networked applications in Python.
