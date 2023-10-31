@@ -75,7 +75,7 @@ print(output)
 connection.disconnect()
 ```
 
-`Implementation:`
+**Implementation:**
 
 1. Import the `ConnectHandler` class from `netmiko`.
 2. Define the device information, including the device type (e.g., `cisco_ios`), IP address, username, password, and enable password (if required).
